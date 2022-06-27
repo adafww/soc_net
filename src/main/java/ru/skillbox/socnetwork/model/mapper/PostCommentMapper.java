@@ -5,7 +5,7 @@ import ru.skillbox.socnetwork.model.entity.PostComment;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+
 public class PostCommentMapper implements RowMapper<PostComment> {
     @Override
     public PostComment mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -17,8 +17,8 @@ public class PostCommentMapper implements RowMapper<PostComment> {
         mapper.setParentId(rs.getInt("parent_id"));
         mapper.setCommentText(rs.getString("comment_text"));
         mapper.setIsBlocked(rs.getBoolean("is_blocked"));
-        mapper.setIsLiked(rs.getBoolean("is_liked"));
         mapper.setLikes(rs.getInt("likes"));
+        mapper.setIsLiked(rs.getBoolean("is_liked"));
         return mapper;
     }
 }

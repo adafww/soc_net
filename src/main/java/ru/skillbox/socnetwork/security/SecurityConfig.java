@@ -1,6 +1,8 @@
 package ru.skillbox.socnetwork.security;
 
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -16,6 +18,7 @@ import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import ru.skillbox.socnetwork.exception.CustomAuthenticationEntryPoint;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Configuration
@@ -23,8 +26,21 @@ import java.util.List;
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Getter
+    @Value("${skillbox.app.server}")
+    private String server;
+    @Getter
+    @Value("${skillbox.app.server.sexy}")
+    private String serverSexy;
+    @Getter
+    @Value("${skillbox.app.server.mcsoft}")
+    private String serverMcsoft;
+    @Getter
+    @Value("${skillbox.app.localhost}")
+    private String localhost;
+
+
     private final JwtCsrfFilter jwtCsrfFilter;
-    private final List<String> hosts = List.of("http://localhost:8080", "http://localhost:8086", "http://195.133.201.227:8080", "http://195.133.201.227");
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -39,8 +55,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/api/v1/auth/**", "/api/v1/account/register").permitAll()
                 .antMatchers("/static/**", "/api/v1/platform/**").permitAll()
-                .antMatchers("/*", "/api/v1/auth/logout").permitAll()
-                .antMatchers("/api/v1/account/password/**").permitAll()
+                .antMatchers("/api/v1/account/password/**", "/actuator/prometheus").permitAll()
+                .antMatchers("/swagger-ui/**", "/v3/api-docs/**", "/swagger-ui.html").permitAll()
                 .antMatchers("/ws/**").permitAll()
                 .antMatchers("/app/**").permitAll()
                 .antMatchers("/topic/**", "/queue/**", "/user/**").permitAll()
@@ -66,13 +82,27 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
         configuration.applyPermitDefaultValues();
-            configuration.setAllowedOrigins(hosts);
-            configuration.setAllowedMethods(List.of("OPTIONS", "DELETE", "POST", "GET", "PATCH", "PUT"));
-            configuration.setExposedHeaders(List.of("Content-Type", "X-Requested-With", "accept", "Origin", "Access-Control-Request-Method",
-                    "Access-Control-Request-Headers", "Access-Control-Allow-Origin", "Access-Control-Allow-Credentials"));
-            configuration.setAllowCredentials(true);
+        configuration.setAllowedOrigins(getHosts());
+        configuration.setAllowedMethods(List.of("OPTIONS", "DELETE", "POST", "GET", "PATCH", "PUT"));
+        configuration.setExposedHeaders(List.of("Content-Type", "X-Requested-With", "accept", "Origin",
+                "Access-Control-Request-Method", "Access-Control-Request-Headers", "Access-Control-Allow-Origin",
+                "Access-Control-Allow-Credentials"));
+        configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
+    }
+
+    private List<String> getHosts() {
+        List<String> links = new ArrayList<>();
+        String http = "http://";
+        String[] hosts = new String[]{getLocalhost(), getServer(), getServerSexy(), getServerMcsoft()};
+        String[] ports = new String[]{":8080", ":8086", "", ":9091"};
+        for (String host : hosts) {
+            for (String port : ports) {
+                links.add(http + host + port);
+            }
+        }
+        return links;
     }
 }

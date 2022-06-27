@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import ru.skillbox.socnetwork.logging.DebugLogs;
 import ru.skillbox.socnetwork.model.entity.Post;
 import ru.skillbox.socnetwork.model.mapper.PostMapper;
-import ru.skillbox.socnetwork.model.rqdto.NewPostDto;
+import ru.skillbox.socnetwork.model.rsdto.postdto.NewPostDto;
 
 import java.util.List;
 
@@ -18,40 +18,41 @@ import java.util.List;
 
 public class PostRepository {
     private final JdbcTemplate jdbc;
+    private static final String SELECT = "select post.*, (post_like.person_id = ?) as is_liked from post " +
+            "left join post_like on (post_like.post_id = post.id and post_like.person_id = ?) ";
 
-    public List<Post> getAll() {
-        return jdbc.query("select * from post", new PostMapper());
+    public List<Post> getAlreadyPostedWithOffset(int offset, int limit, int currentPersonId) {
+
+        String sql = SELECT + "WHERE post.time < (extract(epoch from now()) * 1000) order by id desc LIMIT ? OFFSET ?";
+        return jdbc.query(sql, new PostMapper(), currentPersonId, currentPersonId, limit, offset);
     }
 
-    public List<Post> getAlreadyPostedWithOffset(int offset, int limit) {
-        String sql = "SELECT * FROM post WHERE time < ? ORDER BY id DESC LIMIT ? OFFSET ?";
-        return jdbc.query(sql, new PostMapper(), System.currentTimeMillis(), limit, offset);
+    public List<Post> getByAuthorIdWithOffset(int authorId, int offset, int limit, int currentPersonId) {
+
+        String sql = SELECT + "WHERE author = ? order by id desc LIMIT ? OFFSET ?";
+        return jdbc.query(sql, new PostMapper(), currentPersonId, currentPersonId, authorId, limit, offset);
     }
 
-    public List<Post> getByAuthorIdWithOffset(int authorId, int offset, int limit) {
-        String sql = "SELECT * FROM post WHERE author = ? ORDER BY id DESC LIMIT ? OFFSET ?";
-        return jdbc.query(sql, new PostMapper(), authorId, limit, offset);
+    public Post getById(int postId, int currentPersonId) throws EmptyResultDataAccessException {
+
+        String sql = SELECT + "WHERE post.id = ?";
+        return jdbc.queryForObject(sql, new PostMapper(), currentPersonId, currentPersonId, postId);
     }
 
-    public Post getById(int id) throws EmptyResultDataAccessException {
-        String sql = "SELECT * FROM post WHERE id = ?";
-        return jdbc.queryForObject(sql, new PostMapper(), id);
-    }
-
-    public int deleteById(int id) {
+    public void deleteById(int id) {
         String sql = "delete from post where id = ?";
-        return jdbc.update(sql, id);
+        jdbc.update(sql, id);
     }
 
-    public Post getLastPersonPost(int personId) throws EmptyResultDataAccessException {
-        String sql = "select * from post where author = ? order by id desc limit 1";
-        return jdbc.queryForObject(sql, new PostMapper(), personId);
+    public Post getPersonLastPost(int personId) throws EmptyResultDataAccessException {
+        String sql = SELECT + "where author = ? order by id desc limit 1";
+        return jdbc.queryForObject(sql, new PostMapper(), personId, personId, personId);
     }
 
     public Post addPost(NewPostDto newPostDto) {
         String sql = "insert into post (time, author, title, post_text, is_blocked) values (?, ?, ?, ?, ?)";
         jdbc.update(sql, newPostDto.getTime(), newPostDto.getAuthorId(), newPostDto.getTitle(), newPostDto.getPostText(), false);
-        return getLastPersonPost(newPostDto.getAuthorId());
+        return getPersonLastPost(newPostDto.getAuthorId());
     }
 
     public void editPost(int id, NewPostDto newPostDto) {
@@ -64,38 +65,41 @@ public class PostRepository {
         jdbc.update(sql, likes, postId);
     }
 
-    public List<Post> choosePostsWhichContainsText(String text, long dateFrom, long dateTo, String authorName,
-                                                   String authorSurname, int perPage) {
+    public Integer getPostCount() {
+        String sql = "select count(*) from post";
+        return jdbc.queryForObject(sql, (rs, rowNum) -> rs.getInt("count"));
+    }
+
+    public void deleteAllPersonPosts(Integer personId) {
+        String sql = "DELETE FROM post WHERE author = ?";
+        jdbc.update(sql, personId);
+    }
+
+    public List<Post> choosePostsWhichContainsTextWithTags(String text, long dateFrom, long dateTo, String authorName,
+                                                           String authorSurname, String tags, int perPage, int personId) {
 
         MapSqlParameterSource parameters = new MapSqlParameterSource();
+        parameters.addValue("personId", personId);
         parameters.addValue("name", "%" + authorName + "%");
         parameters.addValue("surname", "%" + authorSurname + "%");
         parameters.addValue("text", "%" + text + "%");
         parameters.addValue("dateFrom", dateFrom);
         parameters.addValue("dateTo", dateTo);
-        String sql = "select " +
-                "post.id, " +
-                "time, " +
-                "author, " +
-                "title, " +
-                "post_text, " +
-                "post.is_blocked, " +
-                "likes " +
-                "from post " +
-                " join person on post.author = person.id" +
-                " where ((first_name like :name and last_name like :surname)" +
-                " or (first_name like :surname and last_name like :name))" +
-                " and (post_text like :text or title like :text)" +
-                " and time > :dateFrom" +
-                " and time < :dateTo" +
-                " and post.is_blocked = 'f'";
+        StringBuilder sql = new StringBuilder();
+        sql.append("select p.*, (pl.person_id = :personId) as is_liked ")
+                .append("from post p left join post_like pl on (pl.post_id = p.id and pl.person_id = :personId)")
+                .append(" join person on p.author = person.id")
+                .append(" left join post2tag pt on p.id = pt.post_id")
+                .append(" left join tag t on pt.tag_id = t.id")
+                .append(" where ((first_name like :name and last_name like :surname)")
+                .append(" or (first_name like :surname and last_name like :name))")
+                .append(" and (post_text like :text or title like :text)")
+                .append(" and p.time > :dateFrom")
+                .append(" and p.time < :dateTo")
+                .append(" and p.is_blocked = 'f'")
+                .append(tags);
 
         NamedParameterJdbcTemplate template = new NamedParameterJdbcTemplate(jdbc);
-        return template.query(sql, parameters, new PostMapper());
-    }
-
-    public void deleteAllPersonPosts(Integer personId){
-        String sql = "DELETE FROM post WHERE author = ?";
-        jdbc.update(sql, personId);
+        return template.query(sql.toString(), parameters, new PostMapper());
     }
 }

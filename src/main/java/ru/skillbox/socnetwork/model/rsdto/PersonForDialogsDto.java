@@ -1,11 +1,13 @@
 package ru.skillbox.socnetwork.model.rsdto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@NoArgsConstructor
+@Schema(hidden = true)
 public class PersonForDialogsDto {
     private Integer id;
     private String photo;
@@ -17,8 +19,4 @@ public class PersonForDialogsDto {
     private String eMail;
     @JsonProperty("last_online_time")
     private Long lastOnlineTime;
-
-    public PersonForDialogsDto() {
-
-    }
 }

@@ -1,0 +1,55 @@
+stages:
+  - test
+  - build
+  - deploy
+
+test:
+  stage: test
+  only:
+    - dev
+  except:
+    - tags
+  allow_failure: true
+  before_script:
+    - gradle clean
+  script:
+    - gradle jacocoTestReport
+    - gradle sonarqube
+  tags:
+    - java_pro_team_linux_ubuntu
+
+build:
+  stage: build
+  only:
+    - dev
+  except:
+    - tags
+  script:
+    - gradle bootJar
+  artifacts:
+    paths:
+      - build/libs/*.jar
+  tags:
+    - java_pro_team_linux_ubuntu
+
+deploy to server:
+  stage: deploy
+  only:
+    - dev
+  except:
+    - tags
+  script:
+##    -kill $(lsof -t -i:8086)s
+##    -nohup java -jar /build/libs/*.jar &
+    - (docker stop $IMAGE_AND_CONTAINER_NAME && docker container rm $IMAGE_AND_CONTAINER_NAME) || true
+    - docker rmi $(docker images $IMAGE_AND_CONTAINER_NAME -q) || true
+    - docker build -t $IMAGE_AND_CONTAINER_NAME .
+    - docker run
+      --name $IMAGE_AND_CONTAINER_NAME
+      -v $LOCAL_PATH_LOGS:/app/logs
+      -v $LOCAL_PATH_CREDENTIALS:/tmp/credentials.json
+      --link $DATABASE_CONTAINER_NAME
+      -p 8086:8086
+      -e SPRING_DATASOURCE_URL=$SPRING_DATASOURCE_URL
+  tags:
+    - java_pro_team_linux_ubuntu

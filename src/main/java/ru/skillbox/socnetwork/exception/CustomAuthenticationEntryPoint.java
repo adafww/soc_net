@@ -13,13 +13,11 @@ import java.io.OutputStream;
 
 public class CustomAuthenticationEntryPoint implements AuthenticationEntryPoint {
 
-    private static final String DEFAULT_ERROR_DESCRIPTION = "This request was denied. " +
-            "Please register or use your existing account to get the updated token value and try again.";
 
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException)
             throws IOException, ServletException {
-        ErrorResponseDto errorResponseDto = new ErrorResponseDto(DEFAULT_ERROR_DESCRIPTION);
+        ErrorResponseDto errorResponseDto = new ErrorResponseDto(ExceptionText.DEFAULT_ERROR_DESCRIPTION.getMessage());
         response.setStatus(401);
         response.setContentType(MimeTypeUtils.APPLICATION_JSON_VALUE);
         OutputStream outputStream = response.getOutputStream();

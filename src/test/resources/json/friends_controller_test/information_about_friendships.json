@@ -1,0 +1,16 @@
+{
+  "error": "string",
+  "total": 20,
+  "offset": 0,
+  "perPage": 20,
+  "data": [
+    {
+      "status": "FRIEND",
+      "user_id": 2
+    },
+    {
+      "status": "REQUEST",
+      "user_id": 3
+    }
+  ]
+}

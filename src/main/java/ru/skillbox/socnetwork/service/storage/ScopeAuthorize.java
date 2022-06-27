@@ -14,7 +14,6 @@ import java.io.InputStreamReader;
 import java.util.Arrays;
 import java.util.Collections;
 
-
 /**
  * You must have an api app migrated to new permission to run this example. You app must have
  * scopes "account_info.read", "files.metadata.write", "files.content.read",

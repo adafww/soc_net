@@ -21,7 +21,7 @@ public class PostLikeRepository {
         return jdbc.query(sql, new PostLikeMapper(), itemId);
     }
 
-    public PostLike getPersonLike(Integer personId, Integer itemId) {
+    public PostLike getPersonPostLike(Integer personId, Integer itemId) {
         String sql = "SELECT * FROM post_like WHERE post_id = ? AND person_id = ?";
         try {
             return jdbc.queryForObject(sql, new PostLikeMapper(), itemId, personId);
@@ -30,32 +30,32 @@ public class PostLikeRepository {
         }
     }
 
-    public void addLike(Integer personId, Integer itemId) {
+    public void addLikeToPost(Integer personId, Integer itemId) {
         String sql = "INSERT INTO post_like (time, person_id, post_id) values (?, ?, ?)";
         jdbc.update(sql, System.currentTimeMillis(), personId, itemId);
     }
 
-    public boolean getIsLiked(Integer currentPersonId, Integer itemId) {
-        return getPersonLike(currentPersonId, itemId) != null;
+    public boolean getIsPostLiked(Integer currentPersonId, Integer itemId) {
+        return getPersonPostLike(currentPersonId, itemId) != null;
     }
 
-    public void deleteLike(Integer currentPersonId, int itemId) {
+    public void deleteLikeFromPost(Integer currentPersonId, int itemId) {
         String sql = "DELETE FROM post_like WHERE person_id = ? AND post_id = ?";
         jdbc.update(sql, currentPersonId, itemId);
     }
 
-    public void deleteAllPersonLikes(Integer personId){
+    public void deleteAllLikesFromPost(int postId) {
+        String sql = "DELETE FROM post_like WHERE post_id = ?";
+        jdbc.update(sql, postId);
+    }
+
+    public void deleteAllPersonPostLikes(Integer personId){
         String sql = "delete from post_like where person_id = ?";
         jdbc.update(sql, personId);
     }
 
-    public void deleteAllPersonPostsLikes(Integer personId){
-        String sql = "DELETE " +
-                "FROM post_like " +
-                "WHERE post_id " +
-                "IN (SELECT id " +
-                "FROM post " +
-                "WHERE author = ?)";
+    public void deleteAllPostLikesFromPersonPosts(Integer personId){
+        String sql = "DELETE FROM post_like WHERE post_id IN (SELECT id FROM post WHERE author = ?)";
         jdbc.update(sql, personId);
     }
 }

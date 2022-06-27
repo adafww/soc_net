@@ -1,0 +1,180 @@
+{
+  "error": "string",
+  "data": [
+    {
+      "id": 1,
+      "recipient": {
+        "id": 2,
+        "photo": null,
+        "first_name": "Ivan",
+        "last_name": "Ivanov",
+        "e_mail": "ivanov@mail.ru",
+        "last_online_time": 0
+      },
+      "last_message": {
+        "id": 3,
+        "author": {
+          "id": 1,
+          "photo": null,
+          "first_name": "Test",
+          "last_name": "Test",
+          "e_mail": "test@mail.ru",
+          "last_online_time": 0
+        },
+        "recipient": {
+          "id": 2,
+          "photo": null,
+          "first_name": "Ivan",
+          "last_name": "Ivanov",
+          "e_mail": "ivanov@mail.ru",
+          "last_online_time": 0
+        },
+        "time": 1649367846505,
+        "isSentByMe": true,
+        "message_text": "hae",
+        "read_status": "SENT"
+      },
+      "unread_count": 2
+    },
+    {
+      "id": 5,
+      "recipient": {
+        "id": 6,
+        "photo": null,
+        "first_name": "Onufriy",
+        "last_name": "Onufriev",
+        "e_mail": "onufriy@mail.ru",
+        "last_online_time": 0
+      },
+      "last_message": {
+        "id": 9,
+        "author": {
+          "id": 1,
+          "photo": null,
+          "first_name": "Test",
+          "last_name": "Test",
+          "e_mail": "test@mail.ru",
+          "last_online_time": 0
+        },
+        "recipient": {
+          "id": 6,
+          "photo": null,
+          "first_name": "Onufriy",
+          "last_name": "Onufriev",
+          "e_mail": "onufriy@mail.ru",
+          "last_online_time": 0
+        },
+        "time": 1649367846503,
+        "isSentByMe": false,
+        "message_text": "test6",
+        "read_status": "SENT"
+      },
+      "unread_count": 2
+    },
+    {
+      "id": 4,
+      "recipient": {
+        "id": 5,
+        "photo": null,
+        "first_name": "Ilya",
+        "last_name": "Ilin",
+        "e_mail": "ilin@mail.ru",
+        "last_online_time": 0
+      },
+      "last_message": {
+        "id": 7,
+        "author": {
+          "id": 1,
+          "photo": null,
+          "first_name": "Test",
+          "last_name": "Test",
+          "e_mail": "test@mail.ru",
+          "last_online_time": 0
+        },
+        "recipient": {
+          "id": 5,
+          "photo": null,
+          "first_name": "Ilya",
+          "last_name": "Ilin",
+          "e_mail": "ilin@mail.ru",
+          "last_online_time": 0
+        },
+        "time": 1649367846503,
+        "isSentByMe": false,
+        "message_text": "test4",
+        "read_status": "READ"
+      },
+      "unread_count": 0
+    },
+    {
+      "id": 2,
+      "recipient": {
+        "id": 3,
+        "photo": null,
+        "first_name": "Petr",
+        "last_name": "Petrov",
+        "e_mail": "petrov@mail.ru",
+        "last_online_time": 0
+      },
+      "last_message": {
+        "id": 4,
+        "author": {
+          "id": 1,
+          "photo": null,
+          "first_name": "Test",
+          "last_name": "Test",
+          "e_mail": "test@mail.ru",
+          "last_online_time": 0
+        },
+        "recipient": {
+          "id": 3,
+          "photo": null,
+          "first_name": "Petr",
+          "last_name": "Petrov",
+          "e_mail": "petrov@mail.ru",
+          "last_online_time": 0
+        },
+        "time": 1649367846503,
+        "isSentByMe": false,
+        "message_text": "test2",
+        "read_status": "SENT"
+      },
+      "unread_count": 1
+    },
+    {
+      "id": 3,
+      "recipient": {
+        "id": 4,
+        "photo": null,
+        "first_name": "Tihon",
+        "last_name": "Tihonov",
+        "e_mail": "tihonov@mail.ru",
+        "last_online_time": 0
+      },
+      "last_message": {
+        "id": 5,
+        "author": {
+          "id": 1,
+          "photo": null,
+          "first_name": "Test",
+          "last_name": "Test",
+          "e_mail": "test@mail.ru",
+          "last_online_time": 0
+        },
+        "recipient": {
+          "id": 4,
+          "photo": null,
+          "first_name": "Tihon",
+          "last_name": "Tihonov",
+          "e_mail": "tihonov@mail.ru",
+          "last_online_time": 0
+        },
+        "time": 1649367846503,
+        "isSentByMe": false,
+        "message_text": "test3",
+        "read_status": "SENT"
+      },
+      "unread_count": 1
+    }
+  ]
+}

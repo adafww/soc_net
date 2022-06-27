@@ -1,6 +1,7 @@
 package ru.skillbox.socnetwork.model.rsdto.filedto;
 
 import com.dropbox.core.v2.files.FileMetadata;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import ru.skillbox.socnetwork.model.entity.Person;
@@ -10,6 +11,7 @@ import java.util.regex.Pattern;
 
 @Data
 @AllArgsConstructor
+@Schema(hidden = true)
 public class FileUploadDTO {
   private String id;
   private Integer ownerID;
@@ -20,6 +22,9 @@ public class FileUploadDTO {
   private Long bytes;
   private FileType fileType;
   private Long createdAt;
+
+  public FileUploadDTO() {
+  }
 
   public FileUploadDTO(Person person, FileMetadata fileMetadata) {
     id = fileMetadata.getId().substring(3);
@@ -34,7 +39,7 @@ public class FileUploadDTO {
   }
 
   private String getFileFormat(String name) {
-    Pattern pattern = Pattern.compile(".*\\.([A-z]*)$");
+    Pattern pattern = Pattern.compile(".{1,10}\\.([A-z]{3,5})$");
     Matcher matcher = pattern.matcher(name);
     return (matcher.find()) ? matcher.group(1) : "";
   }

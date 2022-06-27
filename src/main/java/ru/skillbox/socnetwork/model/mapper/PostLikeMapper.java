@@ -5,7 +5,7 @@ import ru.skillbox.socnetwork.model.entity.PostLike;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+
 public class PostLikeMapper implements RowMapper<PostLike> {
     @Override
     public PostLike mapRow(ResultSet rs, int rowNum) throws SQLException {

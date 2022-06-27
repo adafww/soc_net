@@ -1,0 +1,60 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "time": 1649367846501,
+      "author": {
+        "id": 1,
+        "email": "test@mail.ru",
+        "phone": "+7(111)1111111",
+        "city": "Saratov",
+        "country": "Russia",
+        "first_name": "Test",
+        "last_name": "Test",
+        "reg_date": 1649367846500,
+        "birth_date": 1649367846000,
+        "messages_permission": "ALL",
+        "is_blocked": false
+      },
+      "title": "test title example",
+      "likes": 2,
+      "tags": [
+        "top15",
+        "java",
+        "code",
+        "true_story",
+        "spring",
+        "core",
+        "bootstrap"
+      ],
+      "comments": [
+        {
+          "id": 1,
+          "likes": 0,
+          "time": 1649367846508,
+          "parent_id": 0,
+          "post_id": 1,
+          "comment_text": "test title example",
+          "author": {
+            "id": 5,
+            "email": "ilin@mail.ru",
+            "phone": "+7(999)9999999",
+            "city": "Tbilisi",
+            "country": "Georgia",
+            "first_name": "Ilya",
+            "last_name": "Ilin",
+            "reg_date": 1649367846500,
+            "birth_date": 1649367846000,
+            "messages_permission": "ALL",
+            "is_blocked": false
+          },
+          "is_blocked": false
+        }
+      ],
+      "type": "POSTED",
+      "post_text": "test post text example",
+      "is_blocked": false,
+      "my_like": true
+    }
+  ]
+}

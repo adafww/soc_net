@@ -1,0 +1,27 @@
+{
+  "error": "string",
+  "data": {
+    "id": 2,
+    "author": {
+      "id": 2,
+      "email": "ivanov@mail.ru",
+      "phone": "+7(999)9999999",
+      "city": "Tver",
+      "country": "Russia",
+      "first_name": "Ivan",
+      "last_name": "Ivanov",
+      "reg_date": 1649367846500,
+      "birth_date": 1649367846000,
+      "messages_permission": "ALL",
+      "is_blocked": false
+    },
+    "title": "ivan title example",
+    "likes": 1,
+    "tags": [],
+    "comments": [],
+    "type": "POSTED",
+    "post_text": "ivan post text example",
+    "is_blocked": false,
+    "my_like": true
+  }
+}

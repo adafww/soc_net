@@ -16,21 +16,11 @@ public class PostFileRepository {
     private final JdbcTemplate jdbc;
 
     public List<PostFile> getAllPersonFiles(Integer personId){
-        String sql = "SELECT * " +
-                    "FROM post_file " +
-                    "WHERE post_id " +
-                    "IN (SELECT id " +
-                        "FROM post " +
-                        "WHERE author = ?)";
+        String sql = "SELECT * FROM post_file WHERE post_id IN (SELECT id FROM post WHERE author = ?)";
         return jdbc.query(sql, new PostFileMapper(), personId);
     }
     public void deleteAllPersonFiles(Integer personId){
-        String sql = "DELETE " +
-                    "FROM post_file " +
-                    "WHERE post_id " +
-                    "IN (SELECT id " +
-                        "FROM post " +
-                        "WHERE author = ?)";
+        String sql = "DELETE FROM post_file WHERE post_id IN (SELECT id FROM post WHERE author = ?)";
         jdbc.update(sql, personId);
     }
 }

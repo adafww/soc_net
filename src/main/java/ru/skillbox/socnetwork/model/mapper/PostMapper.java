@@ -5,7 +5,7 @@ import ru.skillbox.socnetwork.model.entity.Post;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
+
 public class PostMapper implements RowMapper<Post> {
     @Override
     public Post mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -17,6 +17,7 @@ public class PostMapper implements RowMapper<Post> {
         mapper.setTime(rs.getLong("time"));
         mapper.setIsBlocked(rs.getBoolean("is_blocked"));
         mapper.setLikes(rs.getInt("likes"));
+        mapper.setIsLiked(rs.getBoolean("is_liked"));
         return mapper;
     }
 }

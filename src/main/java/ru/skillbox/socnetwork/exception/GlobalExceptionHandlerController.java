@@ -23,6 +23,6 @@ public class GlobalExceptionHandlerController {
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public ResponseEntity<ErrorResponseDto> emptyResultDataAccessException() {
-        return ResponseEntity.badRequest().body(new ErrorResponseDto("Dialog doesn't exists"));
+        return ResponseEntity.badRequest().body(new ErrorResponseDto("Object doesn't exists."));
     }
 }

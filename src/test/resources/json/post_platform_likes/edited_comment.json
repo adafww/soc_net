@@ -1,0 +1,7 @@
+{
+  "error": "string",
+  "data": {
+    "id": 1,
+    "comment_text": "new comment"
+  }
+}

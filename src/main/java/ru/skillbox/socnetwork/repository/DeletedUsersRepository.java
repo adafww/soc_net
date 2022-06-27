@@ -36,7 +36,6 @@ public class DeletedUsersRepository {
 
   public void delete(Integer id){
     String sql = "DELETE FROM deleted_users WHERE id = ?";
-    Object[] args = new Object[]{id};
     jdbc.update(sql, id);
   }
 

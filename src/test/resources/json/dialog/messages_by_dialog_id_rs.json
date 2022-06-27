@@ -1,0 +1,74 @@
+{
+  "error": "string",
+  "data": [
+    {
+      "id": 1,
+      "author": {
+        "id": 2,
+        "photo": null,
+        "first_name": "Ivan",
+        "last_name": "Ivanov",
+        "e_mail": "ivanov@mail.ru",
+        "last_online_time": 0
+      },
+      "recipient": {
+        "id": 1,
+        "photo": null,
+        "first_name": "Test",
+        "last_name": "Test",
+        "e_mail": "test@mail.ru",
+        "last_online_time": 0
+      },
+      "time": 1649367846503,
+      "isSentByMe": false,
+      "message_text": "test",
+      "read_status": "SENT"
+    },
+    {
+      "id": 2,
+      "author": {
+        "id": 2,
+        "photo": null,
+        "first_name": "Ivan",
+        "last_name": "Ivanov",
+        "e_mail": "ivanov@mail.ru",
+        "last_online_time": 0
+      },
+      "recipient": {
+        "id": 1,
+        "photo": null,
+        "first_name": "Test",
+        "last_name": "Test",
+        "e_mail": "test@mail.ru",
+        "last_online_time": 0
+      },
+      "time": 1649367846503,
+      "isSentByMe": false,
+      "message_text": "test1",
+      "read_status": "SENT"
+    },
+    {
+      "id": 3,
+      "author": {
+        "id": 1,
+        "photo": null,
+        "first_name": "Test",
+        "last_name": "Test",
+        "e_mail": "test@mail.ru",
+        "last_online_time": 0
+      },
+      "recipient": {
+        "id": 2,
+        "photo": null,
+        "first_name": "Ivan",
+        "last_name": "Ivanov",
+        "e_mail": "ivanov@mail.ru",
+        "last_online_time": 0
+      },
+      "time": 1649367846505,
+      "isSentByMe": true,
+      "message_text": "hae",
+      "read_status": "SENT"
+    }
+  ]
+}

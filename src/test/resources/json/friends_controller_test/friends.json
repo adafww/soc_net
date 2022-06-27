@@ -1,0 +1,41 @@
+{
+  "error": "string",
+  "total": 3,
+  "offset": 0,
+  "perPage": 20,
+  "data": [
+    {
+      "id": 2,
+      "email": "ivanov@mail.ru",
+      "phone": "+7(999)9999999",
+      "first_name": "Ivan",
+      "last_name": "Ivanov",
+      "reg_date": 1649367846500,
+      "birth_date": 1649367846000,
+      "messages_permission": "ALL",
+      "is_blocked": false
+    },
+    {
+      "id": 5,
+      "email": "ilin@mail.ru",
+      "phone": "+7(999)9999999",
+      "first_name": "Ilya",
+      "last_name": "Ilin",
+      "reg_date": 1649367846500,
+      "birth_date": 1649367846000,
+      "messages_permission": "ALL",
+      "is_blocked": false
+    },
+    {
+      "id": 9,
+      "email": "kirilov@mail.ru",
+      "phone": "+7(999)9999999",
+      "first_name": "Kirill",
+      "last_name": "Kirilov",
+      "reg_date": 1649367846500,
+      "birth_date": 1649367846000,
+      "messages_permission": "ALL",
+      "is_blocked": false
+    }
+  ]
+}

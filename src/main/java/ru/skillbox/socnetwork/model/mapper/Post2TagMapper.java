@@ -5,6 +5,7 @@ import ru.skillbox.socnetwork.model.entity.Post2Tag;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 public class Post2TagMapper implements RowMapper<Post2Tag> {
     @Override
     public Post2Tag mapRow(ResultSet rs, int rowNum) throws SQLException {

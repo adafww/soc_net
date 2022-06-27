@@ -33,6 +33,8 @@ public class PersonDto {
     @JsonProperty("is_blocked")
     private Boolean isBlocked;
     private String token;
+    @JsonProperty("is_deleted")
+    private Boolean isDeleted;
 
     public PersonDto(Person person) {
         this.id = person.getId();
@@ -49,6 +51,7 @@ public class PersonDto {
         this.messagesPermission = person.getMessagesPermission().toString();
         this.lastOnlineTime = person.getLastOnlineTime();
         this.isBlocked = person.getIsBlocked();
+        this.isDeleted = person.getIsDeleted();
     }
 
     public PersonDto(Person person, String token) {

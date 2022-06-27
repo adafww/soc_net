@@ -1,0 +1,279 @@
+{
+  "data": {
+    "id": 1,
+    "author": {
+      "id": 1,
+      "email": "test@mail.ru",
+      "phone": "+7(111)1111111",
+      "city": "Saratov",
+      "country": "Russia",
+      "first_name": "Test",
+      "last_name": "Test",
+      "reg_date": 1649367846500,
+      "birth_date": 1649367846000,
+      "messages_permission": "ALL",
+      "is_blocked": false
+    },
+    "title": "test title example",
+    "likes": 2,
+    "tags": [
+      "top15",
+      "java",
+      "code",
+      "true_story",
+      "spring",
+      "core",
+      "bootstrap"
+    ],
+    "comments": [
+      {
+        "id": 1,
+        "likes": 0,
+        "parent_id": 0,
+        "post_id": 1,
+        "comment_text": "test title example",
+        "my_like": false,
+        "author": {
+          "id": 5,
+          "email": "ilin@mail.ru",
+          "phone": "+7(999)9999999",
+          "city": "Tbilisi",
+          "country": "Georgia",
+          "first_name": "Ilya",
+          "last_name": "Ilin",
+          "reg_date": 1649367846500,
+          "birth_date": 1649367846000,
+          "messages_permission": "ALL",
+          "is_blocked": false
+        },
+        "is_blocked": false,
+        "sub_comments": [
+          {
+            "id": 11,
+            "likes": 0,
+            "parent_id": 1,
+            "post_id": 1,
+            "comment_text": "test title example",
+            "my_like": false,
+            "author": {
+              "id": 5,
+              "email": "ilin@mail.ru",
+              "phone": "+7(999)9999999",
+              "city": "Tbilisi",
+              "country": "Georgia",
+              "first_name": "Ilya",
+              "last_name": "Ilin",
+              "reg_date": 1649367846500,
+              "birth_date": 1649367846000,
+              "messages_permission": "ALL",
+              "is_blocked": false
+            },
+            "is_blocked": false
+          },
+          {
+            "id": 12,
+            "likes": 0,
+            "parent_id": 1,
+            "post_id": 1,
+            "comment_text": "ivan title example",
+            "my_like": false,
+            "author": {
+              "id": 6,
+              "email": "onufriy@mail.ru",
+              "phone": "+7(999)9999999",
+              "city": "Alma-Ata",
+              "country": "Kazakhstan",
+              "first_name": "Onufriy",
+              "last_name": "Onufriev",
+              "reg_date": 1649367846500,
+              "birth_date": 1649367846000,
+              "messages_permission": "ALL",
+              "is_blocked": false
+            },
+            "is_blocked": false
+          },
+          {
+            "id": 13,
+            "likes": 0,
+            "parent_id": 1,
+            "post_id": 1,
+            "comment_text": "petr title example",
+            "my_like": false,
+            "author": {
+              "id": 1,
+              "email": "test@mail.ru",
+              "phone": "+7(111)1111111",
+              "city": "Saratov",
+              "country": "Russia",
+              "first_name": "Test",
+              "last_name": "Test",
+              "reg_date": 1649367846500,
+              "birth_date": 1649367846000,
+              "messages_permission": "ALL",
+              "is_blocked": false
+            },
+            "is_blocked": false
+          },
+          {
+            "id": 14,
+            "likes": 0,
+            "parent_id": 1,
+            "post_id": 1,
+            "comment_text": "tihon title example",
+            "my_like": false,
+            "author": {
+              "id": 5,
+              "email": "ilin@mail.ru",
+              "phone": "+7(999)9999999",
+              "city": "Tbilisi",
+              "country": "Georgia",
+              "first_name": "Ilya",
+              "last_name": "Ilin",
+              "reg_date": 1649367846500,
+              "birth_date": 1649367846000,
+              "messages_permission": "ALL",
+              "is_blocked": false
+            },
+            "is_blocked": false
+          },
+          {
+            "id": 15,
+            "likes": 0,
+            "parent_id": 1,
+            "post_id": 1,
+            "comment_text": "ilya title example",
+            "my_like": false,
+            "author": {
+              "id": 2,
+              "email": "ivanov@mail.ru",
+              "phone": "+7(999)9999999",
+              "city": "Tver",
+              "country": "Russia",
+              "first_name": "Ivan",
+              "last_name": "Ivanov",
+              "reg_date": 1649367846500,
+              "birth_date": 1649367846000,
+              "messages_permission": "ALL",
+              "is_blocked": false
+            },
+            "is_blocked": false
+          },
+          {
+            "id": 16,
+            "likes": 0,
+            "parent_id": 1,
+            "post_id": 1,
+            "comment_text": "onufriy title example",
+            "my_like": false,
+            "author": {
+              "id": 3,
+              "email": "petrov@mail.ru",
+              "phone": "+7(999)9999999",
+              "city": "Kaliningrad",
+              "country": "Russia",
+              "first_name": "Petr",
+              "last_name": "Petrov",
+              "reg_date": 1649367846500,
+              "birth_date": 1649367846000,
+              "messages_permission": "ALL",
+              "is_blocked": false
+            },
+            "is_blocked": false
+          },
+          {
+            "id": 17,
+            "likes": 0,
+            "parent_id": 1,
+            "post_id": 1,
+            "comment_text": "test title example 2",
+            "my_like": false,
+            "author": {
+              "id": 5,
+              "email": "ilin@mail.ru",
+              "phone": "+7(999)9999999",
+              "city": "Tbilisi",
+              "country": "Georgia",
+              "first_name": "Ilya",
+              "last_name": "Ilin",
+              "reg_date": 1649367846500,
+              "birth_date": 1649367846000,
+              "messages_permission": "ALL",
+              "is_blocked": false
+            },
+            "is_blocked": false
+          },
+          {
+            "id": 18,
+            "likes": 0,
+            "parent_id": 1,
+            "post_id": 1,
+            "comment_text": "ivan title example 2",
+            "my_like": false,
+            "author": {
+              "id": 4,
+              "email": "tihonov@mail.ru",
+              "phone": "+7(999)9999999",
+              "city": "Perm",
+              "country": "Russia",
+              "first_name": "Tihon",
+              "last_name": "Tihonov",
+              "reg_date": 1649367846500,
+              "birth_date": 1649367846000,
+              "messages_permission": "ALL",
+              "is_blocked": false
+            },
+            "is_blocked": false
+          },
+          {
+            "id": 19,
+            "likes": 0,
+            "parent_id": 1,
+            "post_id": 1,
+            "comment_text": "petr title example 2",
+            "my_like": false,
+            "author": {
+              "id": 2,
+              "email": "ivanov@mail.ru",
+              "phone": "+7(999)9999999",
+              "city": "Tver",
+              "country": "Russia",
+              "first_name": "Ivan",
+              "last_name": "Ivanov",
+              "reg_date": 1649367846500,
+              "birth_date": 1649367846000,
+              "messages_permission": "ALL",
+              "is_blocked": false
+            },
+            "is_blocked": false
+          },
+          {
+            "id": 20,
+            "likes": 0,
+            "parent_id": 1,
+            "post_id": 1,
+            "comment_text": "tihon title example 2",
+            "my_like": false,
+            "author": {
+              "id": 1,
+              "email": "test@mail.ru",
+              "phone": "+7(111)1111111",
+              "city": "Saratov",
+              "country": "Russia",
+              "first_name": "Test",
+              "last_name": "Test",
+              "reg_date": 1649367846500,
+              "birth_date": 1649367846000,
+              "messages_permission": "ALL",
+              "is_blocked": false
+            },
+            "is_blocked": false
+          }
+        ]
+      }
+    ],
+    "type": "POSTED",
+    "post_text": "test post text example",
+    "is_blocked": false,
+    "my_like": true
+  }
+}

@@ -11,6 +11,7 @@ import ru.skillbox.socnetwork.model.entity.PostFile;
 import ru.skillbox.socnetwork.repository.*;
 import ru.skillbox.socnetwork.service.storage.StorageService;
 
+
 import java.util.List;
 
 @Component
@@ -29,17 +30,16 @@ public class DeletedUserService {
   private final Post2TagRepository post2TagRepository;
   private final PostRepository postRepository;
   private final StorageService storageService;
+  private final MailService mailService;
 
-  @Scheduled(fixedRateString = "PT01H")
+  @Scheduled(fixedRateString = "PT10M")
   public void checkExpiredUsers() throws DbxException {
-    List<DeletedUser> users = deletedUsersRepository.getAll();
     List<DeletedUser> expiredUsers = deletedUsersRepository.getAllExpired();
     if(!expiredUsers.isEmpty()){
       for(DeletedUser user : expiredUsers){
         deletePersonData(user.getPersonId());
-        storageService.deleteFile(user.getPhoto());
+        storageService.deleteFile(storageService.getRelativePath(user.getPhoto()));
         deletedUsersRepository.delete(user.getId());
-        personRepository.setDeleted(user.getPersonId(), false);
       }
     }
   }
@@ -50,9 +50,9 @@ public class DeletedUserService {
   }
 
   @Transactional
-  private void deletePersonData(Integer personId) throws DbxException {
-    commentLikeRepository.deleteAllPersonLikes(personId);
-    commentLikeRepository.deleteAllPersonPostsLikes(personId);
+  public void deletePersonData(Integer personId) throws DbxException {
+    commentLikeRepository.deleteAllPersonCommentLikes(personId);
+    commentLikeRepository.deleteAllCommentLikesFromPersonComments(personId);
 
     messageRepository.deleteAllPersonMessages(personId);
 
@@ -60,12 +60,12 @@ public class DeletedUserService {
 
     friendshipRepository.deleteAllPersonFriendships(personId);
 
-    postLikeRepository.deleteAllPersonLikes(personId);
-    postLikeRepository.deleteAllPersonPostsLikes(personId);
+    postLikeRepository.deleteAllPersonPostLikes(personId);
+    postLikeRepository.deleteAllPostLikesFromPersonPosts(personId);
 
     List<PostFile> postFiles = postFileRepository.getAllPersonFiles(personId);
     for(PostFile file : postFiles){
-      storageService.deleteFile(file.getPath());
+      storageService.deleteFile(storageService.getRelativePath(file.getPath()));
     }
     postFileRepository.deleteAllPersonFiles(personId);
 
@@ -76,7 +76,9 @@ public class DeletedUserService {
 
     postRepository.deleteAllPersonPosts(personId);
 
+    String email = personRepository.getById(personId).getEmail();
     personRepository.delete(personId);
+    mailService.send(email, Constants.MAIL_DELETE_SUBJECT, Constants.MAIL_DELETE_TEXT);
   }
 
   public DeletedUser getDeletedUser(Integer personId){

@@ -1,0 +1,9 @@
+{
+    "data": {
+        "id": 10,
+        "isSentByMe": false,
+        "message_text": "test",
+        "read_status": "SENT",
+        "author_id": 1
+    }
+}

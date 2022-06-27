@@ -5,6 +5,7 @@ import ru.skillbox.socnetwork.model.entity.PostFile;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 public class PostFileMapper implements RowMapper<PostFile> {
     @Override
     public PostFile mapRow(ResultSet rs, int rowNum) throws SQLException {

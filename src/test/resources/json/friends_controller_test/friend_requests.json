@@ -1,0 +1,30 @@
+{
+  "error": "string",
+  "total": 2,
+  "offset": 0,
+  "perPage": 20,
+  "data": [
+    {
+      "id": 3,
+      "email": "petrov@mail.ru",
+      "phone": "+7(999)9999999",
+      "first_name": "Petr",
+      "last_name": "Petrov",
+      "reg_date": 1649367846500,
+      "birth_date": 1649367846000,
+      "messages_permission": "ALL",
+      "is_blocked": false
+    },
+    {
+      "id": 6,
+      "email": "onufriy@mail.ru",
+      "phone": "+7(999)9999999",
+      "first_name": "Onufriy",
+      "last_name": "Onufriev",
+      "reg_date": 1649367846500,
+      "birth_date": 1649367846000,
+      "messages_permission": "ALL",
+      "is_blocked": false
+    }
+  ]
+}

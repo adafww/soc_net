@@ -1,19 +1,19 @@
 package ru.skillbox.socnetwork.model.mapper;
 
 import org.springframework.jdbc.core.RowMapper;
-import ru.skillbox.socnetwork.model.rsdto.DialogsResponse;
+import ru.skillbox.socnetwork.model.rsdto.DialogsDto;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class CountMapper implements RowMapper<DialogsResponse> {
+public class CountMapper implements RowMapper<DialogsDto> {
 
     @Override
-    public DialogsResponse mapRow(ResultSet rs, int rowNum) throws SQLException {
-        DialogsResponse dialogsResponse = new DialogsResponse();
+    public DialogsDto mapRow(ResultSet rs, int rowNum) throws SQLException {
+        DialogsDto dialogsDto = new DialogsDto();
 
-        dialogsResponse.setCount(rs.getInt("unread_count"));
+        dialogsDto.setCount(rs.getInt("unread_count"));
 
-        return dialogsResponse;
+        return dialogsDto;
     }
 }

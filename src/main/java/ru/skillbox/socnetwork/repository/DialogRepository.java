@@ -23,7 +23,7 @@ public class DialogRepository {
         return jdbc.queryForObject(sql, Integer.class, dialogId, personId);
     }
     public List<DialogDto> getDialogList(Integer id) {
-        StringBuffer sqlBuff = new StringBuffer();
+        StringBuilder sqlBuff = new StringBuilder();
         sqlBuff.append("SELECT dialog.dialog_id, MAX(time) AS time, (SELECT message_text FROM message ");
         sqlBuff.append("WHERE dialog_id = dialog.dialog_id ORDER BY time DESC LIMIT 1) AS message_text,");
         sqlBuff.append("(SELECT author_id FROM message WHERE dialog_id = dialog.dialog_id ORDER BY time DESC LIMIT 1) ");
@@ -83,13 +83,9 @@ public class DialogRepository {
         return jdbc.queryForObject(sql, new DialogIdMapper(), authorId, recipientId);
     }
 
-    public DialogDto getDialogIdByAuthor (Integer authorId, Integer recipientId) {
-        String sql = "SELECT MAX(dialog_id) AS dialog_id FROM dialog WHERE author_id = ? AND recipient_id = ?";
-        return jdbc.queryForObject(sql, new DialogIdMapper(), authorId, recipientId);
-    }
-    public DialogDto getRecipientIdByDialogIdAndAuthorId (Integer dialog_id, Integer author_id) {
+    public DialogDto getRecipientIdByDialogIdAndAuthorId (Integer dialogId, Integer authorId) {
         String sql = "SELECT recipient_id FROM dialog WHERE dialog_id = ? AND author_id = ?";
 
-        return jdbc.queryForObject(sql, new RecipientMapper(), dialog_id, author_id);
+        return jdbc.queryForObject(sql, new RecipientMapper(), dialogId, authorId);
     }
 }

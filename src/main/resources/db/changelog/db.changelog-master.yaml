@@ -1,34 +1,9 @@
 databaseChangeLog:
   - changeSet:
       id: 1
-      author: Alexandr Luzyanin
+      author: Igor GAnchenko
       comment: init base tables
       sqlFile:
         encoding: UTF-8
         path: migrations/001-create-schema.sql
         relativeToChangelogFile: true
-  - changeSet:
-      id: 2
-      author: Alexandr Luzyanin
-      comment: fill tables
-      sqlFile:
-        encoding: UTF-8
-        path: migrations/002-fill-tables.sql
-        relativeToChangelogFile: true
-  - changeSet:
-      id: 3
-      author: Dmitry Stolyarenko
-      comment: person table changes
-      sqlFile:
-        encoding: UTF-8
-        path: migrations/003-person-table-changes.sql
-        relativeToChangelogFile: true
-  - changeSet:
-      id: 4
-      author: Roman Vladimirov
-      comment: dialog table changes
-      sqlFile:
-        encoding: UTF-8
-        path: migrations/004-dialog-and-message-table-changes.sql
-        relativeToChangelogFile: true
-

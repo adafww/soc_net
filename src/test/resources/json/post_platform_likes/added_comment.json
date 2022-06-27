@@ -1,0 +1,21 @@
+{
+  "error": "string",
+  "data": {
+    "post_id": 1,
+    "comment_text": "new comment",
+    "author": {
+      "id": 1,
+      "email": "test@mail.ru",
+      "phone": "+7(111)1111111",
+      "city": "Saratov",
+      "country": "Russia",
+      "first_name": "Test",
+      "last_name": "Test",
+      "reg_date": 1649367846500,
+      "birth_date": 1649367846000,
+      "messages_permission": "ALL",
+      "is_blocked": false
+    },
+    "is_blocked": false
+  }
+}

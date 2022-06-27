@@ -1,6 +1,11 @@
 create type permission_type as enum ('ALL', 'FRIENDS');
+create type action_type as enum ('BLOCK', 'UNBLOCK');
+create type code_type as enum ('REQUEST', 'FRIEND', 'BLOCKED', 'DECLINED', 'SUBSCRIBED');
+create type read_status_type as enum ('SENT', 'READ');
+create type notification_code_type as enum ('POST', 'POST_COMMENT', 'COMMENT_COMMENT', 'FRIEND_REQUEST', 'MESSAGE'
+, 'FRIEND_BIRTHDAY');
 
-create table person (
+create table if not exists person (
     id serial,
     first_name varchar(50),
     last_name varchar(50),
@@ -18,12 +23,20 @@ create table person (
     messages_permission permission_type,
     last_online_time bigint,
     is_blocked boolean,
+    is_deleted boolean,
     primary key (id)
 );
 
-create type action_type as enum ('BLOCK', 'UNBLOCK');
+create table if not exists deleted_users(
+  id serial,
+  person_id int4,
+  photo varchar(255),
+  first_name varchar(50),
+  last_name varchar(50),
+  expire bigint
+);
 
-create table block_history (
+create table if not exists block_history (
     id serial,
     time bigint,
     person_id int4,
@@ -33,9 +46,7 @@ create table block_history (
     primary key (id)
 );
 
-create type code_type as enum ('REQUEST', 'FRIEND', 'BLOCKED', 'DECLINED', 'SUBSCRIBED');
-
-create table friendship_status (
+create table if not exists friendship_status (
     id serial,
     time bigint,
     name varchar(50),
@@ -43,7 +54,7 @@ create table friendship_status (
     primary key (id)
 );
 
-create table friendship (
+create table if not exists friendship (
     id serial,
     time bigint,
     code code_type,
@@ -56,9 +67,7 @@ create table friendship (
     primary key (id)
 );
 
-create type read_status_type as enum ('SENT', 'READ');
-
-create table message (
+create table if not exists message (
     id serial,
     time bigint,
     author_id int4,
@@ -69,12 +78,15 @@ create table message (
     primary key (id)
 );
 
-CREATE TABLE dialog (
+create table if not exists dialog (
     id serial,
+    author_id int4,
+    recipient_id int4,
+    dialog_id int4,
     primary key (id)
 );
 
-create table post (
+create table if not exists post (
     id serial,
     time bigint,
     author int4,
@@ -85,21 +97,21 @@ create table post (
     primary key (id)
 );
 
-create table tag (
+create table if not exists tag (
     id serial,
     tag varchar(15),
     primary key (id),
     CONSTRAINT tag_unique UNIQUE (tag)
 );
 
-create table post2tag (
+create table if not exists post2tag (
     id serial,
     post_id int4,
     tag_id int4,
     primary key (id)
 );
 
-create table post_like (
+create table if not exists post_like (
     id serial,
     time bigint,
     person_id int4,
@@ -107,7 +119,7 @@ create table post_like (
     primary key (id)
 );
 
-create table post_file (
+create table if not exists post_file (
     id serial,
     post_id int4,
     name varchar(255),
@@ -115,7 +127,7 @@ create table post_file (
     primary key (id)
 );
 
-create table post_comment (
+create table if not exists post_comment (
     id serial,
     time bigint,
     post_id int4,
@@ -127,7 +139,7 @@ create table post_comment (
     primary key (id)
 );
 
-create table comment_like (
+create table if not exists comment_like (
     id serial,
     time bigint,
     person_id int4,
@@ -135,26 +147,27 @@ create table comment_like (
     primary key (id)
 );
 
-create table notification (
+create table if not exists notification (
     id serial,
-    type_id int4,
+    notification_type notification_code_type,
     sent_time bigint,
     person_id int4,
     entity_id int4,
-    contact varchar(50),
+    dist_user_id int4,
+    status read_status_type,
+    title varchar(50),
     primary key (id)
 );
 
-create type notification_code_type as enum ('POST', 'POST_COMMENT', 'COMMENT_COMMENT', 'FRIEND_REQUEST', 'MESSAGE');
-
-create table notification_type (
+create table  if not exists notification_settings (
     id serial,
-    code notification_code_type,
-    name varchar(50),
+	person_id int4,
+    type notification_code_type,
+    enable boolean,
     primary key (id)
 );
 
-create table temptoken (
+create table if not exists temptoken (
     id serial,
     email varchar(255),
     token varchar(255),

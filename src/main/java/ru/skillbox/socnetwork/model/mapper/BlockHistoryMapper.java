@@ -6,7 +6,6 @@ import ru.skillbox.socnetwork.model.entity.enums.TypeAction;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
 
 public class BlockHistoryMapper implements RowMapper<BlockHistory> {
     @Override

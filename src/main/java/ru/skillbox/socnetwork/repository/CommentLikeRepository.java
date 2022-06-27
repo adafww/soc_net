@@ -22,7 +22,7 @@ public class CommentLikeRepository {
         return jdbc.query(sql, new CommentLikeMapper(), itemId);
     }
 
-    public CommentLike getPersonLike(Integer personId, Integer itemId) {
+    public CommentLike getPersonLike(int personId, int itemId) {
         String sql = "SELECT * FROM comment_like WHERE comment_id = ? AND person_id = ?";
         try {
             return jdbc.queryForObject(sql, new CommentLikeMapper(), itemId, personId);
@@ -31,32 +31,38 @@ public class CommentLikeRepository {
         }
     }
 
-    public void addLike(Integer personId, Integer itemId) {
+    public void addLike(int personId, int itemId) {
         String sql = "INSERT INTO comment_like (time, person_id, comment_id) values (?, ?, ?)";
         jdbc.update(sql, System.currentTimeMillis(), personId, itemId);
     }
 
-    public boolean getIsLiked(Integer personId, Integer itemId) {
+    public boolean getIsLiked(int personId, int itemId) {
         return getPersonLike(personId, itemId) != null;
     }
 
-    public void deleteLike(Integer id, int itemId) {
+    public void deleteLike(int id, int itemId) {
         String sql = "DELETE FROM comment_like WHERE person_id = ? AND comment_id = ?";
         jdbc.update(sql, id, itemId);
     }
 
-    public void deleteAllPersonLikes(Integer personId){
+    public void deleteAllPersonCommentLikes(int personId){
         String sql = "delete from comment_like where person_id = ?";
         jdbc.update(sql, personId);
     }
 
-    public void deleteAllPersonPostsLikes(Integer personId){
-        String sql = "DELETE " +
-                "FROM comment_like " +
-                "WHERE comment_id " +
-                "IN (SELECT id " +
-                "FROM post_comment " +
-                "WHERE author_id = ?)";
+    public void deleteAllCommentLikesFromPersonComments(int personId){
+        String sql = "DELETE FROM comment_like WHERE comment_id IN (SELECT id FROM post_comment WHERE author_id = ?)";
         jdbc.update(sql, personId);
+    }
+
+    public void deleteCommentAndSubCommentLikes(int commentId) {
+        String sql = "DELETE FROM comment_like WHERE comment_id = ? OR " +
+                "comment_id IN (SELECT id FROM post_comment WHERE parent_id = ?)";
+        jdbc.update(sql, commentId, commentId);
+    }
+
+    public void deleteCommentLikes(int commentId) {
+        String sql = "DELETE FROM comment_like WHERE comment_id = ?";
+        jdbc.update(sql, commentId);
     }
 }
