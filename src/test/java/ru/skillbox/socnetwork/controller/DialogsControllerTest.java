@@ -61,19 +61,19 @@ class DialogsControllerTest {
 
     }
 
-//    @Test
-//    @WithUserDetails("test@mail.ru")
-//    void sendMessageTest() throws Exception {
-//        this.mockMvc.perform(MockMvcRequestBuilders
-//                        .post("/api/v1/dialogs/1/messages")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(Files.readAllBytes(Paths.get("src/test/resources/json/dialog/send_message_rq.json")))
-//                        .accept(MediaType.APPLICATION_JSON))
-//                .andDo(MockMvcResultHandlers.print())
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.content()
-//                        .json(Files.readString(Paths.get("src/test/resources/json/dialog/send_message_rs.json"))));
-//    }
+    @Test
+    @WithUserDetails("test@mail.ru")
+    void sendMessageTest() throws Exception {
+        this.mockMvc.perform(MockMvcRequestBuilders
+                        .post("/api/v1/dialogs/1/messages")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(Files.readAllBytes(Paths.get("src/test/resources/json/dialog/send_message_rq.json")))
+                        .accept(MediaType.APPLICATION_JSON))
+                .andDo(MockMvcResultHandlers.print())
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content()
+                        .json(Files.readString(Paths.get("src/test/resources/json/dialog/send_message_rs.json"))));
+    }
 
     @Test
     @WithUserDetails("test@mail.ru")

@@ -227,7 +227,7 @@ class FriendsControllerTest {
 
     @Test
     @WithUserDetails("test@mail.ru")
-    public void addFriendNonExistentUserTest() throws Exception {
+    void addFriendNonExistentUserTest() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.post("/api/v1/friends/1232133"))
                 .andExpect(SecurityMockMvcResultMatchers.authenticated())
                 .andExpect(MockMvcResultMatchers.status().isBadRequest())

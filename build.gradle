@@ -80,13 +80,13 @@ jacocoTestReport {
 		xml.enabled true
 	}
 
-	afterEvaluate {
-		classDirectories.setFrom(files(classDirectories.files.collect {
-			fileTree(dir: it, excludes: [
-					"ru/skillbox/socnetwork/model/**"
-			])
-		}))
-	}
+//	afterEvaluate {
+//		classDirectories.setFrom(files(classDirectories.files.collect {
+//			fileTree(dir: it, excludes: [
+//					"ru/skillbox/socnetwork/model/**"
+//			])
+//		}))
+//	}
 }
 
 plugins.withType(JacocoPlugin) {
