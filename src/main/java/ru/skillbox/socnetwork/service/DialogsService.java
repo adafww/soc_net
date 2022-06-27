@@ -1,6 +1,7 @@
 package ru.skillbox.socnetwork.service;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.stereotype.Service;
 import ru.skillbox.socnetwork.logging.DebugLogs;
 import ru.skillbox.socnetwork.model.rqdto.MessageRequest;
@@ -74,7 +75,13 @@ public class DialogsService {
     }
 
     public List<DialogsDto> getDialogs() {
-        List<DialogDto> dialogList = dialogRepository.getDialogList(securityPerson.getPersonId());
+        List<DialogDto> dialogList;
+        try {
+            dialogList = dialogRepository.getDialogList(securityPerson.getPersonId());
+        } catch (EmptyResultDataAccessException ignore) {
+            return new ArrayList<>();
+        }
+
         DialogsDto dialogsDto;
         List<DialogsDto> dialogsDtoList = new ArrayList<>();
         PersonForDialogsDto recipient;
@@ -82,8 +89,12 @@ public class DialogsService {
 
         for (DialogDto dto : dialogList) {
 
+            try {
             recipient = dialogRepository.getRecipientBydialogId(dto.getDialogId(), securityPerson.getPersonId());
             author = dialogRepository.getAuthorByDialogId(dto.getDialogId(), securityPerson.getPersonId());
+            } catch (EmptyResultDataAccessException ignore) {
+                return new ArrayList<>();
+            }
 
             boolean isSendByMe = Objects.equals(securityPerson.getPersonId(), dto.getAuthorId());
             dialogsDto = new DialogsDto();

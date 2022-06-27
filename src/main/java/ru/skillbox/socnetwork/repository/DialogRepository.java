@@ -1,6 +1,7 @@
 package ru.skillbox.socnetwork.repository;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import ru.skillbox.socnetwork.model.mapper.DialogIdMapper;
@@ -22,7 +23,7 @@ public class DialogRepository {
 
         return jdbc.queryForObject(sql, Integer.class, dialogId, personId);
     }
-    public List<DialogDto> getDialogList(Integer id) {
+    public List<DialogDto> getDialogList(Integer id) throws EmptyResultDataAccessException {
         StringBuilder sqlBuff = new StringBuilder();
         sqlBuff.append("SELECT dialog.dialog_id, MAX(time) AS time, (SELECT message_text FROM message ");
         sqlBuff.append("WHERE dialog_id = dialog.dialog_id ORDER BY time DESC LIMIT 1) AS message_text,");

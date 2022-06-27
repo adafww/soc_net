@@ -7,11 +7,3 @@ databaseChangeLog:
         encoding: UTF-8
         path: migrations/001-create-schema.sql
         relativeToChangelogFile: true
-  - changeSet:
-      id: 1
-      author: Roman Vladimirov
-      comment: fill dialog table
-      sqlFile:
-        encoding: UTF-8
-        path: migrations/002-fill-dialog-tables.sql
-        relativeToChangelogFile: true
