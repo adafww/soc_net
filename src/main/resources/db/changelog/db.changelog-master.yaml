@@ -8,7 +8,7 @@ databaseChangeLog:
         path: migrations/001-create-schema.sql
         relativeToChangelogFile: true
   - changeSet:
-      id: 1
+      id: 2
       author: Roman Vladimirov
       comment: fill dialog table
       sqlFile:
