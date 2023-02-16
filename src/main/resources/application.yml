@@ -1,0 +1,25 @@
+#Test data to verify the launch of the web application.
+server.port: 8086
+spring.datasource.url: jdbc:postgresql://localhost:5432/social_network
+spring.datasource.username: postgres
+spring.datasource.password: 80968096
+spring.datasource.driver-class-name: org.postgresql.Driver
+
+# App Properties
+skillbox.app.jwtCookieName: skill
+skillbox.app.jwtSecret:  skillSecretKey
+skillbox.app.localhost: localhost
+
+# Captcha
+secretCaptcha:  psvm
+
+#Mail service auth properties
+skillbox.app.mail.user: aineyltd
+skillbox.app.mail.password: jsnmprsudhednkuk
+
+# Cookies time
+skillbox.app.jwtExpirationMin:  1440
+
+skillbox.app.logRootPath: /app/logs
+skillbox.app.cronUploadLogFiles: 11 11 1 * * ?
+skillbox.app.cronDeleteLogFolderInRemoteStorage: 44 44 4 */7 * ?

@@ -58,18 +58,6 @@ dependencies {
 	testImplementation 'com.opentable.components:otj-pg-embedded:0.13.4'
 	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
 }
-
-sonarqube {
-	properties {
-		property "sonar.sourceEncoding", "UTF-8"
-		property "sonar.projectKey", "0a9f98cfe9f5f5307f2960910d4e44cc3d0e370e"
-		property "sonar.sources", "src/main"
-		property "sonar.tests", "src/test"
-		property "sonar.login", "0a9f98cfe9f5f5307f2960910d4e44cc3d0e370e"
-		property "sonar.lenguage", "java"
-	}
-}
-
 test {
 	finalizedBy jacocoTestReport // report is always generated after tests run
 }
